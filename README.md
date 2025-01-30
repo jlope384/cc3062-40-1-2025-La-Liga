@@ -36,7 +36,7 @@ Puedes acceder a las presentaciones de la sección aquí:
    - Clonar el repositorio localmente:
 
      ```bash
-     git clone https://github.com/menene/cc2005-170-1-2025
+     git clone https://github.com/menene/cc3062-40-1-2025
      ```
    - Navegar a la carpeta del tema correspondiente.
    - Abrir los archivos en tu editor de código favorito.
