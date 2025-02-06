@@ -51,6 +51,10 @@
 
 ## 3. Configurar Nginx para Usar SSL (Virtual Host)
 
+Un Virtual Host es una configuración en un servidor web que permite que un mismo servidor físico o instancia de servidor maneje múltiples sitios web o aplicaciones de forma independiente.
+
+En términos prácticos, los Virtual Hosts permiten que un servidor pueda servir diferentes dominios o subdominios desde una misma máquina con configuraciones separadas.
+
 1. **Edita o crea un archivo de configuración para tu dominio**:
    ```bash
    sudo nano /etc/nginx/sites-available/tudominio.com.conf
