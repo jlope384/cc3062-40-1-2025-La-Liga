@@ -1,0 +1,24 @@
+.articulo {
+    color: red; 
+    background-color: beige;
+    font-size: 18px;
+}
+
+.importante {
+    color: blue; 
+    font-size: 20px;
+}
+
+.mas-importante {
+    font-size: 40px;
+}
+
+.titulo {
+    color: purple; 
+    font-size: 30px; 
+    font-weight: bold;
+}
+/* 
+p {
+    background-color: aquamarine;
+} */
