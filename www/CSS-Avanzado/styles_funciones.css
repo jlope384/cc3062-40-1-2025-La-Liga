@@ -1,0 +1,4 @@
+div {
+    width: calc(100% - 50px);
+    font-size: clamp(1rem, 2vw, 2rem);
+}

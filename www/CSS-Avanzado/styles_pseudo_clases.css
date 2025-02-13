@@ -1,0 +1,6 @@
+a:hover {
+    color: orange;
+}
+li:nth-child(odd) {
+    background-color: lightgray;
+}

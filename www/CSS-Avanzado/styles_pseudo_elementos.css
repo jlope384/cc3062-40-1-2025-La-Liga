@@ -1,0 +1,7 @@
+p::before {
+    content: "⚠ ";
+    color: red;
+}
+p::after {
+    content: " 🔹";
+}
