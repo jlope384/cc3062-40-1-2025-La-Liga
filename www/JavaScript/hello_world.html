@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducción a JS</title>
+    <style>
+        .text {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="titulo">Titulo de la página</h1>
+    <ul>
+        <li class="text">Uno</li>
+        <li class="text">Dos</li>
+        <li class="text">Tres</li>
+    </ul>
+
+    <input type="text" id="texto" placeholder="Ingres tu nombre">
+
+    <button id="btn">Click Me!</button>
+    <script>
+        // console.log("Hello World");
+        // alert("Hola Mundo");
+
+        // let nombre = "Ana";
+        // const edad = 30;
+        // console.log(`Hola, ${nombre}. Tienes ${edad} años.`);
+
+        // nombre = "Erick";
+        // edad = 20;
+        // console.log(`Hola, ${nombre}. Tienes ${edad} años.`);
+
+        // console.log(saludar("Juan"));
+
+        // function saludar(nombre) {
+        //     return `Hola, ${nombre}!`;
+        // }
+
+        // const sumar = (a, b) => a + b;
+        // console.log(sumar(2, 3));
+
+        // console.log("Inicio");
+
+        // setTimeout(() => {
+        //     console.log("Esto aparece después de 2 segundos");
+        // }, 2000);
+
+        // console.log("Fin");
+
+        // console.log(document.title);
+
+        // let elemento = document.querySelector("h1");
+        // console.log(elemento);
+        // console.log(elemento.textContent);
+
+        // elemento.textContent = "OTRO TEXTO";
+
+        // let elementos = document.querySelectorAll(".text");
+        // console.log(elementos);
+        // alert(elementos);
+        // elementos.forEach(el => console.log(el.textContent));
+
+
+        // let nuevoParrafo = document.createElement("p");
+
+        // nuevoParrafo.textContent = "Párrafo agregado con JavaScript.";
+
+        // document.body.appendChild(nuevoParrafo);
+
+
+        document.getElementById("btn").addEventListener("click", function() {
+            // obtener el nombre
+            const nombre = document.getElementById('texto');
+
+            if (nombre.value == "")  {
+                alert("Dije que ingresaras el nombre...");
+            } else {
+                // cambiar valor del h1
+                const titulo = document.getElementById('titulo');
+
+                titulo.textContent = "Hola " + nombre.value;
+                nombre.value = "";
+                // dormir
+            }
+        });
+
+        // document.getElementById("titulo").addEventListener("mouseover", function() {
+        //     alert("H1 clickeado!");
+        // });
+
+        // document.getElementById("texto").addEventListener("keydown", function() {
+        //     // alert("Recibiendo input...");
+
+        //     const el = document.getElementById("texto");
+        //     console.log(el.value)
+        //     // console.log(el.value)
+        // });
+
+    </script>
+</body>
+</html>

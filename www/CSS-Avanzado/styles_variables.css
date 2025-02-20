@@ -1,6 +1,14 @@
 :root {
-    --main-color: blue;
+    --main-color: orange;
 }
 h1 {
+    color: var(--main-color);
+}
+
+p {
+    color: var(--main-color);
+}
+
+a {
     color: var(--main-color);
 }

@@ -1,6 +1,16 @@
 a:hover {
     color: orange;
 }
-li:nth-child(odd) {
-    background-color: lightgray;
+
+p:hover {
+    color: pink;
+}
+
+h1:hover {
+    color: cyan;
+}
+
+li:nth-child(even) {
+    background-color: darkblue;
+    color: #ffffff
 }
