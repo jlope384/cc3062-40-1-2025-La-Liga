@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async/Await</title>
+</head>
+<body>
+    <script>
+        // async function obtenerMensaje() {
+        //     return "Hola, mundo!";
+        // }
+
+        // console.log(obtenerMensaje());
+
+        // obtenerMensaje().then(console.log); // "Hola, mundo!"
+
+        // ---
+
+        // async function obtenerDatos() {
+        //     console.log("Iniciando petición...");
+
+        //     let respuesta = await fetch('https://pokeapi.co/api/v2/pokemon/');
+        //     let datos = await respuesta.json();
+            
+        //     console.log("Datos obtenidos:", datos.results);
+        // }
+
+        // obtenerDatos();
+
+        // ----
+
+        // async function cargarDatos() {
+        //     try {
+        //         let respuesta = await fetch('https://pokeapi.co/api/v2/pokemon/');
+               
+        //         if (!respuesta.ok) {
+        //             throw new Error("Error en la API");
+        //         }
+
+        //         let datos = await respuesta.json();
+                
+        //         console.log("Datos:", datos.results);
+        //     } catch (error) {
+        //         console.error("Error capturado:", error);
+        //     }
+        // }
+
+        // cargarDatos();
+
+        //  ---
+
+        async function obtenerDatosDePokemon() {
+            try {
+                // Hacemos ambas peticiones en paralelo con Promise.all
+                const [listaPokemonesResponse, gengarResponse] = await Promise.all([
+                    fetch('https://pokeapi.co/api/v2/pokemon/'),
+                    fetch('https://pokeapi.co/api/v2/pokemon/gengar')
+                ]);
+
+                // Verificamos si ambas respuestas son exitosas
+                if (!listaPokemonesResponse.ok) {
+                    throw new Error(`Error HTTP en la lista de Pokémon:`);
+                }
+                if (!gengarResponse.ok) {
+                    throw new Error(`Error HTTP en el Pokémon Gengar`);
+                }
+
+                // Convertimos las respuestas a JSON
+                const listaPokemones = await listaPokemonesResponse.json();
+                const gengar = await gengarResponse.json();
+
+                return { listaPokemones: listaPokemones.results, gengar };
+            } catch (error) {
+                console.error("Error en la petición:", error);
+            }
+        }
+
+        obtenerDatosDePokemon()
+            .then(datos => {
+                console.log("Lista de Pokémon:", datos.listaPokemones);
+                console.log("Datos de Gengar:", datos.gengar);
+            });
+    </script>
+</body>
+</html>

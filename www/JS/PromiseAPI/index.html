@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deconstruccion</title>
+</head>
+<body>
+    <script>
+        // const usuario = { nombre: "Juan", edad: 25, pais: "España" };
+        
+        // const { nombre, edad } = usuario;
+        // // const nombre = usuario.nombre;
+        // // const edad = usuario.edad;
+
+        // console.log(nombre);
+        // console.log(edad);
+
+        // ---
+
+        // function mostrarUsuario({ nombre, pais }) {
+        //     console.log(`Nombre: ${nombre}, País: ${pais}`);
+        // }
+
+        // const persona = { nombre: "Ana", edad: 30, pais: "México" };
+        // mostrarUsuario(persona);
+
+        // ---
+
+        // const producto = { nombre: "Laptop", precio: 1000, stock: 10 };
+        // const { nombre, stock = 0 } = producto;
+
+        // console.log(stock); // 0 (valor por defecto)
+
+        // ---
+
+        // const usuario = { nombre: "Pedro", edad: 22 };
+        
+        // const { nombre: nombreUsuario, edad: edadUsuario } = usuario;
+
+        // console.log(nombreUsuario, edadUsuario); // "Pedro", 22
+
+        // ----
+        async function obtenerPokemon() {
+            const response = await fetch('https://pokeapi.co/api/v2/pokemon/');
+            const data = await response.json();
+            const {name, url} = data.results[0];
+
+            console.log(`Nombre: ${name}, URL: ${url}`);
+        }
+
+        obtenerPokemon();
+    </script>
+</body>
+</html>

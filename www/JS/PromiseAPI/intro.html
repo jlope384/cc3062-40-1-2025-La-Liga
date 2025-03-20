@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primise API</title>
+</head>
+<body>
+    <script>
+        // console.log("Inicio");
+        // alert("Bloqueo del código");
+        // console.log("Fin");
+
+        // ---
+
+        // // Inicia la solicitud de datos de Pokémon (no bloquea la interfaz)
+        // const productos = fetch('https://pokeapi.co/api/v2/pokemon/')
+        //     .then(response => response.json());
+
+        // // Este mensaje se muestra inmediatamente, antes de que los datos lleguen
+        // console.log("Cargando interfaz...");
+
+        // // Cuando la promesa se resuelve, se imprime en la consola pero la UI no cambia
+        // productos.then(data => {
+        //     console.log("Datos cargados:", data.results);
+        // });
+
+        // ---
+
+        document.body.innerHTML = "<h2>Cargando Pokémon...</h2>";
+
+        fetch('https://pokeapi.co/api/v2/pokemon/')
+            .then(response => response.json())
+            .then(data => {
+                setTimeout(() => {
+                    document.body.innerHTML = `<h2>Pokémon Cargados:</h2><ul>` + 
+                        data.results.map(pokemon => `<li>${pokemon.name}</li>`).join('') + 
+                        `</ul>`;
+                }, 2000);
+            })
+            .catch(error => {
+                document.body.innerHTML = "<h2>Error al cargar los datos.</h2>";
+                console.error("Error:", error);
+            });
+    </script>
+</body>
+</html>
