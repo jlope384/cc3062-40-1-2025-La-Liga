@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UVG Things</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            margin: 40px;
+            background-color: #d5d5d5;
+        }
+
+        #taskContainer {
+            max-width: 400px;
+            margin: auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.4);
+        }
+
+        input {
+            width: 85%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            background-color: #28a745;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: #eee;
+            margin: 5px 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        li:hover {
+            background-color: #ddd;
+        }
+
+        .done {
+            color: gray;
+            text-decoration: line-through;
+        }
+
+        .tallBtn {
+            padding: 10px;
+        }
+
+        .shortBtn {
+            padding: 5px;
+        }
+
+        .deleteBtn {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .deleteBtn:hover {
+            background-color: darkred;
+        }
+
+        .alta {
+            color: red;
+        }
+
+        .media {
+            color: orange;
+        }
+
+        .baja {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <!-- contenido -->
+
+    <div id="taskContainer">
+        <h1>UVG Things</h1>
+
+        <p> 
+            <input type="text" id="taskInput" placeholder="Escribe tu tarea...">
+        </p>
+
+        <p>
+            <select id="cmbPriority">
+                <option value="alta">Alta</option>
+                <option value="media">Media</option>
+                <option value="baja" selected>Baja</option>
+            </select>
+        </p>
+
+        <button onclick="addTask()">Agregar</button>
+        <button class="deleteBtn tallBtn" onclick="clearAll()">Limpiar</button>
+
+        <ul id="taskList"></ul>
+    </div>
+
+
+
+    <!-- scripts -->
+    <script>
+        document.addEventListener("DOMContentLoaded", render);
+
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const taskValue = taskInput.value;
+
+            const priorityCmb = document.getElementById("cmbPriority");
+            const priorityValue = priorityCmb.value;
+
+            if (taskValue === "") {
+                alert("Es necesario escribir una tarea!!!");
+                return;
+            }
+
+            const task = {
+                task: taskValue,
+                priority: priorityValue,
+                completed: false
+            };
+
+            // Esto es posible que se refactorice
+            const tasks = readStorage();
+            tasks.push(task);
+
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            render();
+
+            taskInput.value = ""; 
+        }
+
+        function completeTask(task) {
+            // task.classList.toggle("done");
+            const tasks = readStorage();
+            const index = task.dataset.index;
+
+            tasks[index].completed = !tasks[index].completed;
+
+            localStorage.setItem("tasks", JSON.stringify(tasks));
+
+            render();
+        }
+
+        function deleteTask(task) {
+            if (confirm("¿Seguro que quieres borrar la tarea?")) {
+                const tasks = readStorage();
+                const index = task.parentElement.dataset.index;
+
+                tasks.splice(index, 1);
+
+                localStorage.setItem("tasks", JSON.stringify(tasks));
+                
+                render();
+            }
+        }
+
+        function clearAll() {
+            if (confirm("¿Seguro que quieres borrar todas las tareas?")) {
+                localStorage.removeItem("tasks");
+
+                render();
+            }
+        }
+
+        function render() {
+            const taskList = document.getElementById("taskList");
+            taskList.innerHTML = "";
+
+            const tasks = readStorage();
+
+            tasks.forEach((task, index) => {
+                const li = document.createElement('li');
+                li.dataset.index = index;
+                li.innerHTML = `
+                    <span>${task.task}</span>
+                    <span class="${task.priority}">[${task.priority.toUpperCase()}]</span>
+                    <button class="deleteBtn shortBtn" onclick="deleteTask(this)">X</button>
+                `;
+
+                if (task.completed) {
+                    li.classList.add("done");
+                }
+
+                li.addEventListener("click", () => completeTask(li))
+
+                taskList.appendChild(li);
+            });
+        }
+
+        function readStorage() {
+            return JSON.parse(localStorage.getItem("tasks")) || [];
+        }
+    </script>
+</body>
+</html>

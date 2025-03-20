@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UVG Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="login-container">
+    <h1>🔐 Login</h1>
+
+    <input type="text" id="user" placeholder="Ingrese su usuario">
+    <input type="password" id="pass" placeholder="Ingrese su clave">
+
+    <button onclick="login()">Ingresar</button>
+    <button onclick="showPassword()" id="togglePassword" class="showPassword">
+      Mostrar clave
+    </button>
+
+    <p id="message" class="message"></p>
+  </div>
+
+  <script>
+    // In case an earlier error was stored
+    if (localStorage.getItem("unaccesible")) {
+      document.getElementById("message").innerHTML = localStorage.getItem("unaccesible");
+      localStorage.removeItem("unaccesible");
+    }
+
+    // Set the base URL for the backend API
+    const backendUrl = "http://localhost:8090";
+
+    function login() {
+      const username = document.getElementById("user").value;
+      const password = document.getElementById("pass").value;
+
+      fetch(backendUrl + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password })
+      })
+      .then(response => {
+        if (!response.ok) {
+          // Attempt to parse error message from response
+          return response.json().then(data => {
+            throw new Error(data.detail || "Login failed");
+          });
+        }
+        return response.json();
+      })
+      .then(data => {
+        if (data.success) {
+          localStorage.setItem("logged_user", username);
+          window.location.href = 'dashboard.html';
+        } else {
+          document.getElementById("message").textContent = data.message;
+        }
+      })
+      .catch(error => {
+        document.getElementById("message").textContent = error.message || "Lo sentimos, credenciales incorrectas";
+      });
+    }
+
+    function showPassword() {
+      const passInput = document.getElementById("pass");
+      const btn = document.getElementById("togglePassword");
+      if (passInput.type === "password") {
+        passInput.type = "text";
+        btn.innerHTML = "Ocultar clave";
+        btn.classList.add("hidePassword");
+        btn.classList.remove("showPassword");
+      } else {
+        passInput.type = "password";
+        btn.innerHTML = "Mostrar clave";
+        btn.classList.add("showPassword");
+        btn.classList.remove("hidePassword");
+      }
+    }
+  </script>
+</body>
+</html>

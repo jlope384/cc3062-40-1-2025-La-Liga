@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Secreto</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Bienvenidos!</h1>
+    <p id="message"></p>
+
+    <button onclick="logout()">Salir</button>
+
+    <script>
+        const loggedUser = localStorage.getItem("logged_user");
+
+        if (!loggedUser) {
+            localStorage.setItem("unaccesible", "Para ver el dashboard es necesario hacer login");
+            window.location.href = "index.html";
+        }
+
+        document.getElementById("message").innerHTML = "Gracias por regresar, " + loggedUser;
+
+        function logout() {
+            localStorage.removeItem("logged_user");
+            window.location.href = "index.html";
+        }
+    </script>
+</body>
+</html>

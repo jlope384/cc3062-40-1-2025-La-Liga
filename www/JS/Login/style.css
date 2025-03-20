@@ -1,0 +1,53 @@
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    align-items: center;
+    background-color: #d5d5d5;
+    margin-top: 50px;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+input {
+    width: 95%;
+    border: 1px solid #d5d5d5;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    background-color: orange;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid orange;
+    padding: 10px;
+}
+
+button:hover {
+    background-color: orangered;
+    border: 1px solid orangered;
+}
+
+.message {
+    color: red;
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.hidePassword {
+    background-color: green;
+    border: 1px solid green;
+}
+
+.showPassword {
+    background-color: red;
+    border: 1px solid red;
+}
