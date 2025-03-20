@@ -7,8 +7,20 @@
 </head>
 <body>
     <script>
+        // fetch('https://pokeapi.co/api/v2/pokemon/')
+        //     .then(response => response.json())
+        //     .then(data => console.log("Datos obtenidos:", data.results))
+        //     .catch(error => console.error("Error en la petición:", error));
+
+        // ---
+
         fetch('https://pokeapi.co/api/v2/pokemon/')
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error HTTP: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => console.log("Datos obtenidos:", data.results))
             .catch(error => console.error("Error en la petición:", error));
     </script>
