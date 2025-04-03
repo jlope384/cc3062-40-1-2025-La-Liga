@@ -2,7 +2,7 @@ import CONFIG from './config.js';
 
 const getStandings = async () => {
 
-    const response = await fetch(`${CONFIG.API_URL}/standings?league=140&season=2024`, {
+    const response = await fetch(`${CONFIG.API_URL}/standings?league=140&season=2023`, {
         headers: {
             'x-apisports-key': CONFIG.API_URL
         }

@@ -8,6 +8,9 @@ const StandigsPage = () => {
 
         try {
             const data = await getStandings();
+            
+            console.log(data);
+
             const raw = data.response[0].league.standings[0];
             const title = data.response[0].league;
 
