@@ -1,5 +1,5 @@
 const CONFIG = {
-    API_URL: "f65e3ac12f42ed06fd38e9167ac5de44"
+    API_URL: ""
 }
 
 export default CONFIG;
