@@ -2,9 +2,9 @@ import StandigsRow from "../components/StandingsRow.js";
 
 const StandingsTable = () => {
 
-    const render = (standings) => {
+    const render = (standings, totals) => {
         let tableHtml = `
-            <table border="1" style="width:100%; border-collapse: collapse;">
+            <table class="table table-sm table-bordered table-striped">
             <thead>
                 <tr>
                     <th>Rank</th>
@@ -18,18 +18,26 @@ const StandingsTable = () => {
                     <th>Goles Favor</th>
                     <th>Goles Contra</th>
                     <th>Diferencia Goles</th>
+                    <th>% Eficiencia</th>
                 </tr>
             </thead>
             <tbody>
         `;
 
         standings.forEach(item => {
-            console.log(item);
             tableHtml += StandigsRow(item);
         });
 
         tableHtml += `
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th colspan="8">Total</th>
+                        <th>${totals.forGoals}</th>
+                        <th>${totals.againstGoals}</th>
+                        <th colspan="2"></th>
+                    </tr>
+                </tfoot>
             </table>
         `
 
